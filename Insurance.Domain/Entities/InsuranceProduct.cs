@@ -1,8 +1,7 @@
 namespace Insurance.Domain.Entities
 {
-    public class InsuranceProduct
+    public class InsuranceProduct : BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Type { get; set; } // e.g., Auto, Home, Life, Health
@@ -10,8 +9,6 @@ namespace Insurance.Domain.Entities
         public string CoverageDetails { get; set; }
         public int CoverageLimitInDays { get; set; }
         public bool IsActive { get; set; } = true;
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
         // Navigation properties
         public ICollection<Policy> Policies { get; set; } = new List<Policy>();

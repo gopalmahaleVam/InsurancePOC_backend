@@ -21,6 +21,11 @@ public interface IUnitOfWork : IAsyncDisposable
     ICustomerRepository Customers { get; }
 
     /// <summary>
+    /// Insurance product repository for product-related data access.
+    /// </summary>
+    Insurance.Domain.Interfaces.IInsuranceProductRepository Products { get; }
+
+    /// <summary>
     /// Commits all pending changes to the database in a single transaction.
     /// </summary>
     /// <param name="cancellationToken">Cancellation token for the operation</param>

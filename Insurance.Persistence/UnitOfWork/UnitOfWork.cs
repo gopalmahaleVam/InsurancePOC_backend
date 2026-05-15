@@ -16,6 +16,7 @@ public class UnitOfWork : IUnitOfWork
     private IDbContextTransaction? _transaction;
     private IUserRepository? _userRepository;
     private ICustomerRepository? _customerRepository;
+    private Insurance.Domain.Interfaces.IInsuranceProductRepository? _productRepository;
 
     public UnitOfWork(InsuranceDbContext context)
     {
@@ -45,6 +46,18 @@ public class UnitOfWork : IUnitOfWork
         {
             _customerRepository ??= new CustomerRepository(_context);
             return _customerRepository;
+        }
+    }
+
+    /// <summary>
+    /// Gets the insurance product repository, lazily instantiating it on first access.
+    /// </summary>
+    public Insurance.Domain.Interfaces.IInsuranceProductRepository Products
+    {
+        get
+        {
+            _productRepository ??= new InsuranceProductRepository(_context);
+            return _productRepository;
         }
     }
 
