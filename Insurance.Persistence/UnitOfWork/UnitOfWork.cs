@@ -17,6 +17,9 @@ public class UnitOfWork : IUnitOfWork
     private IUserRepository? _userRepository;
     private ICustomerRepository? _customerRepository;
     private Insurance.Domain.Interfaces.IInsuranceProductRepository? _productRepository;
+    private Insurance.Domain.Interfaces.IPolicyRepository? _policyRepository;
+    private Insurance.Domain.Interfaces.IClaimRepository? _claimRepository;
+    private Insurance.Domain.Interfaces.IPaymentRepository? _paymentRepository;
 
     public UnitOfWork(InsuranceDbContext context)
     {
@@ -58,6 +61,42 @@ public class UnitOfWork : IUnitOfWork
         {
             _productRepository ??= new InsuranceProductRepository(_context);
             return _productRepository;
+        }
+    }
+
+    /// <summary>
+    /// Gets the policy repository, lazily instantiating it on first access.
+    /// </summary>
+    public Insurance.Domain.Interfaces.IPolicyRepository Policies
+    {
+        get
+        {
+            _policyRepository ??= new PolicyRepository(_context);
+            return _policyRepository;
+        }
+    }
+
+    /// <summary>
+    /// Gets the claim repository, lazily instantiating it on first access.
+    /// </summary>
+    public Insurance.Domain.Interfaces.IClaimRepository Claims
+    {
+        get
+        {
+            _claimRepository ??= new ClaimRepository(_context);
+            return _claimRepository;
+        }
+    }
+
+    /// <summary>
+    /// Gets the payment repository, lazily instantiating it on first access.
+    /// </summary>
+    public Insurance.Domain.Interfaces.IPaymentRepository Payments
+    {
+        get
+        {
+            _paymentRepository ??= new PaymentRepository(_context);
+            return _paymentRepository;
         }
     }
 

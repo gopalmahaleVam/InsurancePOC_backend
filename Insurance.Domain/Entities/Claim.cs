@@ -3,9 +3,8 @@ using Insurance.Domain.Enums;
 
 namespace Insurance.Domain.Entities
 {
-    public class Claim
+    public class Claim : BaseEntity
     {
-        public int Id { get; set; }
         public string ClaimNumber { get; set; }
         public int PolicyId { get; set; }
         public int CustomerId { get; set; }
@@ -15,8 +14,6 @@ namespace Insurance.Domain.Entities
         public ClaimStatus Status { get; set; } = ClaimStatus.Submitted;
         public DateTime? ResolutionDate { get; set; }
         public string? ResolutionNotes { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
         // Navigation properties
         public Policy Policy { get; set; }

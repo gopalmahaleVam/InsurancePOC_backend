@@ -26,6 +26,21 @@ public interface IUnitOfWork : IAsyncDisposable
     Insurance.Domain.Interfaces.IInsuranceProductRepository Products { get; }
 
     /// <summary>
+    /// Policy repository for policy-related data access.
+    /// </summary>
+    Insurance.Domain.Interfaces.IPolicyRepository Policies { get; }
+
+    /// <summary>
+    /// Payment repository for payment-related data access.
+    /// </summary>
+    Insurance.Domain.Interfaces.IPaymentRepository Payments { get; }
+
+    /// <summary>
+    /// Claim repository for claim-related data access.
+    /// </summary>
+    Insurance.Domain.Interfaces.IClaimRepository Claims { get; }
+
+    /// <summary>
     /// Commits all pending changes to the database in a single transaction.
     /// </summary>
     /// <param name="cancellationToken">Cancellation token for the operation</param>

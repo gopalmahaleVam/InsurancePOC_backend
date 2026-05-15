@@ -2,9 +2,8 @@ using Insurance.Domain.Enums;
 
 namespace Insurance.Domain.Entities
 {
-    public class Policy
+    public class Policy : BaseEntity
     {
-        public int Id { get; set; }
         public string PolicyNumber { get; set; }
         public int CustomerId { get; set; }
         public int InsuranceProductId { get; set; }
@@ -13,8 +12,6 @@ namespace Insurance.Domain.Entities
         public decimal PremiumAmount { get; set; }
         public PolicyStatus Status { get; set; } = PolicyStatus.Active;
         public string PaymentFrequency { get; set; } = "Annual"; // Annual, Monthly, etc.
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
         // Navigation properties
         public Customer Customer { get; set; }
