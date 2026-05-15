@@ -52,6 +52,19 @@ namespace Insurance.Persistence.Context
                 .WithMany(c => c.Payments)
                 .HasForeignKey(p => p.CustomerId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            // Specify precision for decimal properties to avoid SQL Server default truncation warnings
+            modelBuilder.Entity<Payment>()
+                .Property(p => p.Amount)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Policy>()
+                .Property(p => p.PremiumAmount)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Quote>()
+                .Property(q => q.QuotedAmount)
+                .HasPrecision(18, 2);
         }
     }
 }
