@@ -15,6 +15,7 @@ public class UnitOfWork : IUnitOfWork
     private readonly InsuranceDbContext _context;
     private IDbContextTransaction? _transaction;
     private IUserRepository? _userRepository;
+    private ICustomerRepository? _customerRepository;
 
     public UnitOfWork(InsuranceDbContext context)
     {
@@ -31,6 +32,19 @@ public class UnitOfWork : IUnitOfWork
         {
             _userRepository ??= new UserRepository(_context);
             return _userRepository;
+        }
+    }
+
+    /// <summary>
+    /// Gets the customer repository, lazily instantiating it on first access.
+    /// This prevents creating unused repositories for operations that don't need them.
+    /// </summary>
+    public ICustomerRepository Customers
+    {
+        get
+        {
+            _customerRepository ??= new CustomerRepository(_context);
+            return _customerRepository;
         }
     }
 

@@ -1,6 +1,45 @@
 namespace Insurance.Application.Common.Models;
 
 /// <summary>
+/// Non-generic result wrapper for operations that don't return data.
+/// Used for operations like Delete that only need success/failure status.
+/// </summary>
+public class Result
+{
+    /// <summary>
+    /// Indicates whether the operation completed successfully.
+    /// </summary>
+    public bool IsSuccess { get; private set; }
+
+    /// <summary>
+    /// Error message if the operation failed. Null if successful.
+    /// </summary>
+    public string? ErrorMessage { get; private set; }
+
+    private Result(bool isSuccess, string? errorMessage = null)
+    {
+        IsSuccess = isSuccess;
+        ErrorMessage = errorMessage;
+    }
+
+    /// <summary>
+    /// Creates a successful result.
+    /// </summary>
+    /// <param name="errorMessage">Optional success message</param>
+    /// <returns>Successful Result instance</returns>
+    public static Result SuccessResult(string? errorMessage = null)
+        => new(true, errorMessage);
+
+    /// <summary>
+    /// Creates a failed result with the specified error message.
+    /// </summary>
+    /// <param name="errorMessage">Description of what went wrong</param>
+    /// <returns>Failed Result instance</returns>
+    public static Result FailureResult(string errorMessage)
+        => new(false, errorMessage);
+}
+
+/// <summary>
 /// Generic result wrapper for command/query responses using the Result pattern.
 /// Replaces throwing exceptions with explicit success/failure states for cleaner error handling.
 /// </summary>
@@ -39,9 +78,10 @@ public class Result<T>
     /// Creates a successful result with the specified data.
     /// </summary>
     /// <param name="data">The data to return</param>
+    /// <param name="message">Optional success message</param>
     /// <returns>Successful Result instance</returns>
-    public static Result<T> Success(T data)
-        => new(true, data);
+    public static Result<T> Success(T data, string? message = null)
+        => new(true, data, message);
 
     /// <summary>
     /// Creates a failed result with the specified error message.

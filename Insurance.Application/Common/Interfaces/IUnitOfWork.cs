@@ -16,6 +16,11 @@ public interface IUnitOfWork : IAsyncDisposable
     IUserRepository Users { get; }
 
     /// <summary>
+    /// Customer repository for customer-related data access.
+    /// </summary>
+    ICustomerRepository Customers { get; }
+
+    /// <summary>
     /// Commits all pending changes to the database in a single transaction.
     /// </summary>
     /// <param name="cancellationToken">Cancellation token for the operation</param>

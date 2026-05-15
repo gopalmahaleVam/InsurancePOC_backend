@@ -4,6 +4,7 @@ using Insurance.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Insurance.Persistence.Migrations
 {
     [DbContext(typeof(InsuranceDbContext))]
-    partial class InsuranceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260514171459_AddIsDeletedColumn")]
+    partial class AddIsDeletedColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

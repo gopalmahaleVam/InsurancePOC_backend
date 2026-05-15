@@ -53,6 +53,7 @@ public static class DependencyInjection
         // Register generic and specific repositories
         services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
 
         return services;
     }
